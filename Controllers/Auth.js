@@ -5,7 +5,6 @@ const User = require("../Models/User");
 const isAuth = require("../Middlewares/isAuth");
 
 AuthRouter.post("/register", (req, res) => {
-  // console.log(req.body)
   const { email, username, password, name, phoneNumber } = req.body;
   cleanUpAndValidate(email, username, password)
     .then(async () => {
@@ -83,7 +82,6 @@ AuthRouter.post("/login", async (req, res) => {
 
 AuthRouter.post("/logout", isAuth, (req, res) => {
   const userData = req.session.user;
-  console.log(userData);
   req.session.destroy((err) => {
     if (err) {
       return res.send({

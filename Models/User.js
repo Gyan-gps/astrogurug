@@ -26,7 +26,6 @@ const User = class {
           $or: [{ username }, { email }],
         });
 
-        // console.log("user did not exists");
 
         if (userDb && userDb.email === email) {
           return reject("Email already exists");
@@ -83,7 +82,6 @@ const User = class {
       if (!isMatch) {
         return reject("Password do not matched");
       }
-      // console.log(userDb._id)
       const JWT_TOKEN = jwt.sign({ email: userDb.email, userId: userDb._id }, "GYANPRAKASHGPS", {
         expiresIn: "15d",
       });

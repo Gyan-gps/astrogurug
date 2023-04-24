@@ -4,7 +4,6 @@ const TodosRouter = express.Router();
 const Todos = require("../Models/Todos");
 
 TodosRouter.post("/create-todo", async (req, res) => {
-  // console.log(req.body);
   const taskName = req.body.taskName;
   const taskDiscription = req.body.taskDiscription;
   const userId = req.JWT_TOKEN.userId;
@@ -58,7 +57,6 @@ TodosRouter.post("/create-todo", async (req, res) => {
       data: todoDb,
     });
   } catch (err) {
-    // console.log(err);
     return res.send({
       status: 400,
       message: "Error occured",
@@ -71,11 +69,11 @@ TodosRouter.post("/update-todo", async (req, res) => {
   const todoId = req.body.todoId;
   const key = req.body.key;
   const value = req.body.value;
-  if(!todoId){
+  if (!todoId) {
     return res.send({
-      status:400,
-      message:"Please provide todoId"
-    })
+      status: 400,
+      message: "Please provide todoId",
+    });
   }
   try {
     const todo = await Todos.updateTodo({ todoId, key, value });
@@ -85,7 +83,6 @@ TodosRouter.post("/update-todo", async (req, res) => {
       data: todo,
     });
   } catch (err) {
-    // console.log(err);
     return res.send({
       status: 400,
       message: "Update Unsuccessfully",
@@ -128,7 +125,6 @@ TodosRouter.get("/my-todos", async (req, res) => {
       data: todos,
     });
   } catch (err) {
-    // console.log(err);
     return res.send({
       status: 401,
       message: "Read Unsuccessfully",
@@ -140,11 +136,11 @@ TodosRouter.get("/my-todos", async (req, res) => {
 TodosRouter.post("/delete-todo", async (req, res) => {
   const todoId = req.body.todoId;
 
-  if(!todoId){
+  if (!todoId) {
     return res.send({
-      status:400,
-      message:"Please provide todoId"
-    })
+      status: 400,
+      message: "Please provide todoId",
+    });
   }
 
   try {
@@ -158,7 +154,6 @@ TodosRouter.post("/delete-todo", async (req, res) => {
       data: todoData,
     });
   } catch (error) {
-    // console.log(error);
     return res.send({
       status: 401,
       message: "Deletion Failed",

@@ -62,18 +62,14 @@ const Todos = class {
     return new Promise(async (resolve, reject) => {
       try {
         const todosDb = await todoSchema.aggregate([
-          { $match: { userId:new ObjectId(userId) } },
+          { $match: { userId: new ObjectId(userId) } },
           { $sort: { creationDatetime: -1 } },
           {
             $facet: {
-              data: [
-                { $skip: parseInt(offset) },
-                { $limit: constants },
-              ],
+              data: [{ $skip: parseInt(offset) }, { $limit: constants }],
             },
           },
         ]);
-        console.log(todosDb);
         resolve(todosDb[0].data);
       } catch (err) {
         console.log(err);

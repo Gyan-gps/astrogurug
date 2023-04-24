@@ -18,7 +18,6 @@ const isAuth = (req, res, next) => {
       try {
         const userId = data.userId;
         await User.verifyUserId({ userId });
-        // console.log(x);
       } catch (err) {
         console.log(err);
         return res.send({
