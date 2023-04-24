@@ -7,12 +7,11 @@ const taskReminder = ()=>{
       async () => {
         try {
           const todos = await todosSchema.find();
-
           todos.forEach((todo) => {
             const durationLeft =
               (Date.now() - todo.creationDatetime) / (1000 * 60 * 60);
 
-            if (durationLeft < 1) {
+            if (!todo.isCompleted && durationLeft < 12 && durationLeft > 11) {
               sendReminderMail({ todo });
             }
           });
